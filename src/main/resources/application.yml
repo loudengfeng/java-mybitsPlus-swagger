@@ -1,0 +1,52 @@
+#spring:
+##  datasource: com.mysql.cj.jdbc.Driver
+##    username: root
+##    password: 123456
+##    url: jdbc:mysql://192.168.10.65:3306/111?useUnicode=true&characterEncoding=utf8
+spring:
+#  redis:
+#    host: 192.168.1.7
+#    password: 123456789
+#    connect-timeout: 10s
+#    port: 6379
+#    lettuce:
+#      pool:
+#        #连接池中的最小空闲连接
+#        min-idle: 0
+#        #连接池中的最小空闲连接
+#        max-idle: 8
+#        #连接池中的最大数据库连接数
+#        max-active: 8
+#        #连接池最大堵塞等待时间（使用负值没有限制）
+#        max-wait: -1ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.0.121/111?useUnicode=true&characterEncoding=utf8
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      initial-size: 1                     #连接池初始大小
+      min-idle: 1                         #连接池中最小的活跃连接数
+      pool-prepared-statements: true    #打开PSCache，并且指定每个连接上PSCache的大小
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 30000
+      test-on-borrow: false             #是否在获得连接后检测其可用性
+      test-on-return: false             #是否在连接放回连接池后检测其可用性
+      test-while-idle: true             #是否在连接空闲一段时间后检测其可用性
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+    tomcat:
+      max-active: 20                      #连接池中最大的活跃连接数
+      max-wait: 60000                     #配置获取连接等待超时的时间
+  filter:
+    stat:
+      enabled: true
+      # 慢SQL记录
+      log-slow-sql: true
+      slow-sql-millis: 1000
+      merge-sql: true
+server:
+  port: 7878
+  #  servlet:
+  #    context-path: /cn
